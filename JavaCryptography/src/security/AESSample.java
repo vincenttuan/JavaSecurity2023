@@ -15,8 +15,8 @@ public class AESSample {
 	public static void main(String[] args) throws Exception {
 		System.out.println("AES 加密範例:");
 		
-		String originalTest = "1234"; // 明文
-		System.out.println("原始訊息（明文）：" + originalTest);
+		String originalText = "1234"; // 明文
+		System.out.println("原始訊息（明文）：" + originalText);
 		System.out.println("------------------------------------------------------------------------------------------");
 		
 		// 建立 AES 密鑰規範
@@ -25,7 +25,7 @@ public class AESSample {
 		// ECB 模式
 		System.out.println("ECB 模式");
 		// 進行資料加密(將明文進行 AES-EBC 加密)
-		byte[] encryptedECB = KeyUtil.encryptWithAESKey(aesKeySpec, originalTest);
+		byte[] encryptedECB = KeyUtil.encryptWithAESKey(aesKeySpec, originalText);
 		System.out.println("加密後的訊息:" + Arrays.toString(encryptedECB));
 		// byte[] 轉 base64 字串
 		System.out.println("加密後的訊息(Base64):" + Base64.getEncoder().encodeToString(encryptedECB));
@@ -46,7 +46,7 @@ public class AESSample {
 		System.out.println("隨機 CBC IV:" + Base64.getEncoder().encodeToString(ivCBC));
 		
 		// 進行資料加密(將明文進行 AES-CBC 加密)
-		byte[] encryptedCBC = KeyUtil.encryptWithAESKeyAndIV(aesKeySpec, originalTest, ivCBC);
+		byte[] encryptedCBC = KeyUtil.encryptWithAESKeyAndIV(aesKeySpec, originalText, ivCBC);
 		System.out.println("加密後的訊息(Base64):" + Base64.getEncoder().encodeToString(encryptedCBC));
 		
 		// 進行資料解密
@@ -54,8 +54,22 @@ public class AESSample {
 		System.out.println("解密後的訊息:" + decryptedCBC);
 		
 		System.out.println("------------------------------------------------------------------------------------------");
-		// CTR 模式
 		
+		// CTR 模式
+		System.out.println("CTR 模式");
+		// 建立隨機 IV
+		byte[] ivCTR = new byte[16];
+		SECURE_RANDOM.nextBytes(ivCTR);
+		System.out.println("隨機 CTR IV:" + Base64.getEncoder().encodeToString(ivCTR));
+		
+		// 進行資料加密(將明文進行 AES-CTR 加密)
+		byte[] encryptedCTR = KeyUtil.encryptWithAESKeyAndIVInCTRMode(aesKeySpec, originalText, ivCTR);
+		System.out.println("加密後的訊息(Base64):" + Base64.getEncoder().encodeToString(encryptedCTR));
+		
+		// 進行資料解密
+		String decryptedCTR = KeyUtil.decryptWithAESKeyAndIVInCTRMode(aesKeySpec, encryptedCTR, ivCTR);
+		System.out.println("解密後的訊息:" + decryptedCTR);
+				
 	}
 
 }

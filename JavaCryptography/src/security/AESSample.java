@@ -44,6 +44,7 @@ public class AESSample {
 		byte[] ivCBC = new byte[16];
 		SECURE_RANDOM.nextBytes(ivCBC); // 產生一個隨機的 byte[] 資訊當作 IV
 		System.out.println("隨機 CBC IV:" + Base64.getEncoder().encodeToString(ivCBC));
+		
 		// 進行資料加密(將明文進行 AES-CBC 加密)
 		byte[] encryptedCBC = KeyUtil.encryptWithAESKeyAndIV(aesKeySpec, originalTest, ivCBC);
 		System.out.println("加密後的訊息(Base64):" + Base64.getEncoder().encodeToString(encryptedCBC));

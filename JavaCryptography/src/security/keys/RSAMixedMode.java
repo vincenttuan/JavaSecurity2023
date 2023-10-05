@@ -66,6 +66,8 @@ public class RSAMixedMode {
 		byte[] receivedSignature = Base64.getDecoder().decode(parts[1]);
 		
 		// Bob 要使用 Alice 的公鑰來驗證是否是 Alice 的簽名
+		// 2048 位元的 RSA 密鑰長度與 "SHA512withRSA" 簽名算法可以一起使用。
+		// RSA 2048 是足夠強大的，可以安全地與 SHA-512 一起使用。
 		boolean isVerified = KeyUtil.verifySignature(aliceKeyPair.getPublic(), reveivedMessage, receivedSignature, "SHA512withRSA");
 		if(isVerified) {
 			System.out.println("收到 Alice 簽名的訊息：" + reveivedMessage);

@@ -1,10 +1,12 @@
-package security;
+package security.keys;
 
 import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Base64;
 
 import javax.crypto.spec.SecretKeySpec;
+
+import security.KeyUtil;
 
 public class AESSample {
 	// 建立一個 AES Key (AES-128 bits, 16 bytes)

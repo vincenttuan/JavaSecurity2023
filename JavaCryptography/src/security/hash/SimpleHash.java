@@ -10,10 +10,10 @@ public class SimpleHash {
 		// Hot Code 一段密碼
 		String password = "1234";
 		
-		// 獲取 SHA-256 消息摘要物件，幫助我們生成密碼的哈希
+		// 1. 獲取 SHA-256 消息摘要物件，幫助我們生成密碼的哈希
 		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
 		
-		// 將密碼轉換為 byte[] 然後生成哈希
+		// 2. 將密碼轉換為 byte[] 然後生成哈希
 		byte[] hashedBytes = messageDigest.digest(password.getBytes());
 		
 		// 將 byte[] 轉 Hex(16進位) 字串呈現

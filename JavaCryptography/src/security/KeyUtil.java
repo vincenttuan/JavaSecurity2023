@@ -86,7 +86,6 @@ public class KeyUtil {
         return signature.verify(digitalSignature);
     }
 
-    /*
     public static boolean verifySignature(PublicKey publicKey, String filePath, byte[] digitalSignature) throws Exception {
         Signature signature = Signature.getInstance("SHA256withRSA");
         signature.initVerify(publicKey);
@@ -96,8 +95,7 @@ public class KeyUtil {
         
         return signature.verify(digitalSignature);
     }
-    */
-
+    
 
     /**
      * 使用AES密鑰加密訊息。

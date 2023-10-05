@@ -68,10 +68,25 @@ public class KeyUtil {
      * 
      * @param publicKey 公鑰，用於驗證簽名。
      * @param message   原始的未加密訊息。
-     * @param signature 要驗證的數字簽名。
+     * @param digitalSignature 要驗證的數字簽名。
+     * @param cypto 加密演算。
      * @return 若簽名有效，返回true，否則返回false。
      * @throws Exception 若簽名驗證過程中發生錯誤時拋出。
      */
+    public static boolean verifySignature(PublicKey publicKey, String message, byte[] digitalSignature, String cypto) throws Exception {
+        Signature signature = Signature.getInstance(cypto);
+
+        // 初始化Signature對象用於驗證
+        signature.initVerify(publicKey);
+        
+        // 將原始消息加入到Signature對象中，以便進行驗證
+        signature.update(message.getBytes());
+        
+        // 使用公鑰和數字簽名來驗證消息
+        return signature.verify(digitalSignature);
+    }
+
+    /*
     public static boolean verifySignature(PublicKey publicKey, String filePath, byte[] digitalSignature) throws Exception {
         Signature signature = Signature.getInstance("SHA256withRSA");
         signature.initVerify(publicKey);
@@ -81,6 +96,7 @@ public class KeyUtil {
         
         return signature.verify(digitalSignature);
     }
+    */
 
 
     /**

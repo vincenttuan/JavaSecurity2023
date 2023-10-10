@@ -62,16 +62,16 @@ public class KeyUtil {
         sign.update(message.getBytes());
         return sign.sign();
     }
-
+    
     /**
      * 使用公鑰驗證訊息的數字簽名。
      * 
-     * @param publicKey 公鑰，用於驗證簽名。
-     * @param message   原始的未加密訊息。
-     * @param digitalSignature 要驗證的數字簽名。
-     * @param cypto 加密演算。
-     * @return 若簽名有效，返回true，否則返回false。
-     * @throws Exception 若簽名驗證過程中發生錯誤時拋出。
+     * @param publicKey        用於驗證數字簽名的公鑰。
+     * @param message          需要驗證其數字簽名的原始訊息。
+     * @param digitalSignature 該訊息的數位簽名。
+     * @param cypto            使用的數字簽名算法。
+     * @return                 返回true表示數字簽名是有效的，false表示數字簽名無效。
+     * @throws Exception       若在驗證過程中遇到任何問題，會拋出異常。
      */
     public static boolean verifySignature(PublicKey publicKey, String message, byte[] digitalSignature, String cypto) throws Exception {
         Signature signature = Signature.getInstance(cypto);
@@ -79,14 +79,37 @@ public class KeyUtil {
         // 初始化Signature對象用於驗證
         signature.initVerify(publicKey);
         
-        // 將原始消息加入到Signature對象中，以便進行驗證
+        // 更新需要被驗證的訊息到Signature物件
         signature.update(message.getBytes());
         
-        // 使用公鑰和數字簽名來驗證消息
+        // 驗證訊息的數字簽名是否正確
         return signature.verify(digitalSignature);
     }
 
-    public static boolean verifySignature(PublicKey publicKey, String filePath, byte[] digitalSignature) throws Exception {
+    /**
+     * 使用公鑰驗證訊息的數字簽名。
+     * 
+     * @param publicKey 公鑰，用於驗證簽名。
+     * @param message   原始的未加密訊息。
+     * @param digitalSignature 要驗證的數位簽名。
+     * @return 返回true表示數字簽名是有效的，false表示數字簽名無效。
+     * @throws Exception 若簽名驗證過程中發生錯誤時拋出。
+     */
+    public static boolean verifySignatureFromMessage(PublicKey publicKey, String message, byte[] digitalSignature) throws Exception {
+        String cryto = "SHA256withRSA";
+    	return verifySignature(publicKey, message, digitalSignature, cryto);
+    }
+    
+    /**
+     * 使用公鑰驗證訊息的數字簽名。
+     * 
+     * @param publicKey 公鑰，用於驗證簽名。
+     * @param filePath   需要驗證其數字簽名的檔案路徑。。
+     * @param digitalSignature 從檔案生成的數位簽名。
+     * @return 返回true表示數字簽名是有效的，false表示數字簽名無效。
+     * @throws Exception 若簽名驗證過程中發生錯誤時拋出。
+     */
+    public static boolean verifySignatureFromFile(PublicKey publicKey, String filePath, byte[] digitalSignature) throws Exception {
         Signature signature = Signature.getInstance("SHA256withRSA");
         signature.initVerify(publicKey);
 
@@ -95,7 +118,6 @@ public class KeyUtil {
         
         return signature.verify(digitalSignature);
     }
-    
 
     /**
      * 使用AES密鑰加密訊息。

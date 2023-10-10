@@ -23,6 +23,7 @@ import security.KeyUtil;
 public class DigitalSignatureCreator {
 
 	public static void main(String[] args) throws Exception {
+		// 小王：
 		// 合約檔位置
 		String contractPath = "src/security/sign/my_contract.txt";
 		// 公鑰檔位置

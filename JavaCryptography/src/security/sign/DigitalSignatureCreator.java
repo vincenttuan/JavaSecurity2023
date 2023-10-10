@@ -27,7 +27,7 @@ public class DigitalSignatureCreator {
 		// 公鑰檔位置
 		String publicKeyPath = "src/security/sign/publicKey.key";
 		// 私鑰檔位置
-		String privateKeyPath = "src/security/sign/privateKey.txt";
+		String privateKeyPath = "src/security/sign/privateKey.key";
 		// 數位簽章檔位置
 		String signaturePath = "src/security/sign/signature.sig";
 		

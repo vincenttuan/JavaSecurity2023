@@ -1,5 +1,12 @@
 package security.mac;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import javax.crypto.SecretKey;
+
+import security.KeyUtil;
+
 /*
  * 
  * 用於驗證薪資明細的 MAC
@@ -13,8 +20,33 @@ package security.mac;
 */
 public class SalaryMacVerify {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public static void main(String[] args) throws Exception {
+		// 員工：
+		// 取得薪資檔案位置
+		String filepath = "src/security/mac/my_salary.txt";
+		// 知道金鑰檔案位置
+		String keypath = "src/security/mac/macKey.key";
+		
+		// 將密鑰檔 macKey.key 轉成密鑰(SecretKey)物件
+		SecretKey macKey = KeyUtil.getSecretKeyFromFile("HmacSHA256", keypath);
+		
+		// 得到 HR 部門所生成的 mac value
+		String hrMacValue = "3cfe2ad7ded695e5c518c3fbe0f5e61267290fd12e781bf6592d11556e5a3c90";
+		
+		// 員工自己生成 mac value 來與 HR 部門所生成的 mac value 進行比對
+		// macKey + filepath 生成 mac value
+		String computedMacValue = KeyUtil.generateMac("HmacSHA256", macKey, filepath);
+		
+		// 最後確認資料是否是來自於 HR 部門
+		if(computedMacValue.equals(hrMacValue)) {
+			System.out.println("MAC 驗證成功，此訊息是來自於 HR 部門");
+			// 讀取檔案內容
+			String data = Files.readString(Paths.get(filepath));
+			System.out.println(data);
+		} else {
+			System.out.println("MAC 驗證失敗");
+		}
+				
 
 	}
 

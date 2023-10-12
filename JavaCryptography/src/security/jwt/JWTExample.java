@@ -34,7 +34,7 @@ public class JWTExample {
 				.subject("user") // 設定主題
 				.issuer("http://myapp.com") // 設定發行者
 				.claim("name", "John") // 添加自定義資訊
-				.claim("email", "jhon@myapp.com")
+				.claim("email", "John@myapp.com")
 				.build();
 		
 		// 3. JWT：創建 JWT（尚未簽名）

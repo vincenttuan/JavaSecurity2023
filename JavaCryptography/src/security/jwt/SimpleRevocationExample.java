@@ -22,7 +22,7 @@ import security.KeyUtil;
  */
 public class SimpleRevocationExample {
 	
-	// 儲存已經撤銷的 JWT
+	// 儲存已經撤銷的 JWT（黑名單）
 	private static Set<String> revokedTokens = new HashSet();
 	
 	public static void main(String[] args) throws Exception {

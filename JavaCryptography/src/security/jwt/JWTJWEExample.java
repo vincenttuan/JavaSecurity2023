@@ -1,9 +1,16 @@
 package security.jwt;
 
+import com.nimbusds.jose.EncryptionMethod;
+import com.nimbusds.jose.JWEAlgorithm;
+import com.nimbusds.jose.JWEHeader;
+import com.nimbusds.jose.JWEObject;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
 import com.nimbusds.jose.JWSSigner;
 import com.nimbusds.jose.JWSVerifier;
+import com.nimbusds.jose.Payload;
+import com.nimbusds.jose.crypto.DirectDecrypter;
+import com.nimbusds.jose.crypto.DirectEncrypter;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
@@ -48,16 +55,42 @@ public class JWTJWEExample {
 		// 進行簽名
 		signedJWT.sign(jwsSigner);
 		
-		// 5. 透過序列化技術可以將 jwt 被安全的傳遞或儲存，而不曝露其內容
-		String token = signedJWT.serialize(); // 序列化
+		// 4.1 JWE：對已簽名的 JWT 進行加密 -------------------------------------------------
+		// 使用 A192GCM 演算法 192位元（24字節）的密鑰
+		JWEHeader jweHeader = new JWEHeader.Builder(JWEAlgorithm.DIR, EncryptionMethod.A192GCM)
+											.contentType("JWT")
+											.build();
+		JWEObject jweObject = new JWEObject(
+					jweHeader,
+					new Payload(signedJWT)
+		);
 		
-		System.out.println("「有簽名」但內容「無加密」的 JWT（token）: \n" + token);
+		// 4.2 加密
+		// 應該要用 24, 但是會有 bug 所以用 16
+		// 可能是 nimbusds 的問題，也許在後續版本會修正
+		String encryptionSecret = KeyUtil.generateSecret(16); 
+		jweObject.encrypt(new DirectEncrypter(encryptionSecret.getBytes())); // 直接加密
+		
+		//--------------------------------------------------------------------------------
+		
+		// 5. 透過序列化技術可以將 jwt 被安全的傳遞或儲存，而不曝露其內容
+		//String token = signedJWT.serialize(); // 序列化
+		//System.out.println("「有簽名」但內容「無加密」的 JWT（token）: \n" + token);
+		
+		String token = jweObject.serialize();
+		System.out.println("「有簽名」且內容「有加密」的 JWT（token）: \n" + token);
 		
 		//**********************************************************************
 		System.out.println();
-		// 6. 驗證：驗證 JWT 的簽名
-		// 從 token 中取得簽名
-		SignedJWT verifiedJWT = SignedJWT.parse(token);
+		
+		// 6. 解密：將加密的 JWT 先行解密
+		JWEObject decryptdJweObject = JWEObject.parse(token);
+		decryptdJweObject.decrypt(new DirectDecrypter(encryptionSecret.getBytes()));
+		
+		// 7. 驗證：驗證 JWT 的簽名
+		// 從 decryptdJweObject 中取得 jwt
+		SignedJWT verifiedJWT = decryptdJweObject.getPayload().toSignedJWT();
+		
 		// 取得密鑰
 		JWSVerifier verifier = new MACVerifier(signingSecret);
 		

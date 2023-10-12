@@ -46,17 +46,19 @@ public class SimpleLimitedJWT {
 		Thread.sleep(11_000);
 		
 		// 5. 嘗試驗證令牌的簽名以及檢查它是否已過期。
+		JWTClaimsSet claims = KeyUtil.getClaimsFromToken(token);
+		
 		if(KeyUtil.verifyJWTSignature(token, signingSecret)) {
 			System.out.println("簽名驗證成功");
-			JWTClaimsSet claims = KeyUtil.getClaimsFromToken(token);
-			// 檢查是否過期 ?
-			if(new Date().after(claims.getExpirationTime())) {
-				System.out.println("令牌已將過期");
-			} else {
-				System.out.println("令牌未過期仍可以使用");
-			}
 		} else {
 			System.out.println("簽名驗證失敗");
+		}
+		
+		// 檢查是否過期 ?
+		if(new Date().after(claims.getExpirationTime())) {
+			System.out.println("令牌已將過期");
+		} else {
+			System.out.println("令牌未過期仍可以使用");
 		}
 
 	}

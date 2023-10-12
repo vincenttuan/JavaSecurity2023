@@ -3,7 +3,9 @@ package security.jwt;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
 import com.nimbusds.jose.JWSSigner;
+import com.nimbusds.jose.JWSVerifier;
 import com.nimbusds.jose.crypto.MACSigner;
+import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 
@@ -29,6 +31,7 @@ public class JWTExample {
 		// 2. JWK：產生一個簽名用的密鑰 給 JWS 使用
 		String signingSecret = KeyUtil.generateSecret(32); // 256位元（32）字結的密鑰
 		System.out.println("signingSecret: \n" + signingSecret);
+		
 		// 定義 Payload
 		JWTClaimsSet payload = new JWTClaimsSet.Builder()
 				.subject("user") // 設定主題
@@ -50,6 +53,23 @@ public class JWTExample {
 		
 		System.out.println("「有簽名」但內容「無加密」的 JWT（token）: \n" + token);
 		
+		//**********************************************************************
+		System.out.println();
+		// 6. 驗證：驗證 JWT 的簽名
+		// 從 token 中取得簽名
+		SignedJWT verifiedJWT = SignedJWT.parse(token);
+		// 取得密鑰
+		JWSVerifier verifier = new MACVerifier(signingSecret+"abc");
 		
+		if(verifiedJWT.verify(verifier)) {
+			System.out.println("簽名驗證成功 !");
+			JWTClaimsSet claims = verifiedJWT.getJWTClaimsSet();
+			System.out.println("主題 subject：" + claims.getSubject());
+			System.out.println("發行者 issuer：" + claims.getIssuer());
+			System.out.println("name：" + claims.getStringClaim("name"));
+			System.out.println("email：" + claims.getStringClaim("email"));
+		} else {
+			System.out.println("簽名驗證失敗");
+		}
 	}
 }

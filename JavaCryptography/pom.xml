@@ -3,6 +3,16 @@
   <groupId>JavaCryptography</groupId>
   <artifactId>JavaCryptography</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  
+  <dependencies>
+	<!-- JWT -->
+	<dependency>
+		<groupId>com.nimbusds</groupId>
+    	<artifactId>nimbus-jose-jwt</artifactId>
+    	<version>9.15.1</version>
+	</dependency>
+  </dependencies>
+  
   <build>
     <sourceDirectory>src</sourceDirectory>
     <resources>

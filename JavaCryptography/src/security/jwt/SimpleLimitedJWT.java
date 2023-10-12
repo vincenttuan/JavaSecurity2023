@@ -55,6 +55,7 @@ public class SimpleLimitedJWT {
 		}
 		
 		// 檢查是否過期 ?
+		// 若過期驗證 JWT 的簽名也會失效
 		if(new Date().after(claims.getExpirationTime())) {
 			System.out.println("令牌已將過期");
 		} else {

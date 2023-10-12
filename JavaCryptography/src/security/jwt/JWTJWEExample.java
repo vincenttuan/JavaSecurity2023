@@ -12,18 +12,18 @@ import com.nimbusds.jwt.SignedJWT;
 import security.KeyUtil;
 
 /**
-依據（JWA、JWK）與（JWS）產生 Token（JWT） 
+依據（JWA、JWK）與（JWE、JWS）產生 Token（JWT） 
 
-	+-----+   +-----+
-	| JWK | → | JWS |
-	+-----+   +-----+
-	   ↑         ↓
-	+-----+   +-----+
-	| JWA |   | JWT |
-	+-----+   +-----+
-		
- */
-public class JWTExample {
+	+-----+   +-----+   +-----+
+	| JWK | → | JWE |   | JWS |
+	+-----+   +-----+   +-----+
+	   ↑            ↓   ↓
+	+-----+        +-----+
+	| JWA |        | JWT |
+	+-----+        +-----+
+	
+*/
+public class JWTJWEExample {
 	public static void main(String[] args) throws Exception {
 		// 1. JWA：使用 HS256 算法
 		JWSHeader header = new JWSHeader(JWSAlgorithm.HS256);

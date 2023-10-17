@@ -16,8 +16,8 @@ import security.KeyUtil;
  * 
  * 程式實作主要流程：
  * 1. 生成主要的機密鑰匙 (masterKey)。
- * 2. 創建並簽署「房間卡」(Access Token)。
- * 3. 創建並簽署「房間卡產生器」(Refresh Token)。
+ * 2. 創建並簽署「房間卡產生器」(Refresh Token)。
+ * 3. 創建並簽署「房間卡」(Access Token)。
  * 4. 驗證「房間卡」是否過期。
  * 5. 若「房間卡」過期，使用「房間卡產生器」重新簽署新的「房間卡」。
  * 6. 模擬「房間卡產生器」過期後的情況。
@@ -50,9 +50,35 @@ public class HotelKeySystem {
 		return signedRoomCardGenerator;
 	}
 	
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public static void main(String[] args) throws Exception {
+		// 1. 生成主要的機密鑰匙 (masterKey)。
+		masterKey = KeyUtil.generateSecret(32); // 32 bytes 的密鑰長度
+		
+		// 2. 創建並簽署「房間卡產生器」(Refresh Token)。
+		String signedRoomCardGenerator = createRoomCardGenerator();
+		
+		String signedRoomCard = null;
+		// 透過房間卡產生器生成房間卡，若房間卡產生器沒有過期就可以生成房間卡
+		if(KeyUtil.verifyJWTSignature(signedRoomCardGenerator, masterKey)) {
+			// 3. 創建並簽署「房間卡」(Access Token)。
+			signedRoomCard = createRoomCard("john", "101"); // 客戶：john、房號：101
+		} else {
+			System.out.println("房間卡產生器過期，無法生成房間卡");
+			System.exit(1); // 人為停止系統
+		}
+		
+		// 印出房間卡產生器與房間卡
+		System.out.printf("房間卡產生器(1分鐘有效): %s%n", signedRoomCardGenerator);
+		System.out.printf("房間卡(5秒鐘有效): %s%n", signedRoomCard);
+		
+		
+		// 4. 驗證「房間卡」是否過期。
+		
+		
+		// 5. 若「房間卡」過期，使用「房間卡產生器」重新簽署新的「房間卡」。
+		
+		
+		// 6. 模擬「房間卡產生器」過期後的情況。
 
 	}
 

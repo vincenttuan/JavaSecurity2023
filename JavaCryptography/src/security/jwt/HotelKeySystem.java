@@ -71,7 +71,6 @@ public class HotelKeySystem {
 		System.out.printf("房間卡產生器(1分鐘有效): %s%n", signedRoomCardGenerator);
 		System.out.printf("房間卡(5秒鐘有效): %s%n", signedRoomCard);
 		
-		
 		// 4. 驗證「房間卡」是否過期。
 		
 		

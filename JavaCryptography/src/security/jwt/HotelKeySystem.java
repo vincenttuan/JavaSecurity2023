@@ -38,6 +38,18 @@ public class HotelKeySystem {
 		return signedRoomCard;
 	}
 	
+	// 創建並簽署「房間卡產生器」(Refresh Token)。
+	private static String createRoomCardGenerator() throws JOSEException {
+		JWTClaimsSet roomCardGenerator = new JWTClaimsSet.Builder()
+				.subject("frontDesk") // 前台的身份
+				.issuer("https://hotel.com") // 飯店發行單位
+				.claim("authority", "create room card") // 可以放入一些授權的資訊
+				.expirationTime(new Date(new Date().getTime() + 60_000)) // 設定房卡產生器有效時間，例如：1 分鐘
+				.build(); // 建立房卡產生器
+		String signedRoomCardGenerator = KeyUtil.signJWT(roomCardGenerator, masterKey); // 將房卡產生器簽章
+		return signedRoomCardGenerator;
+	}
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

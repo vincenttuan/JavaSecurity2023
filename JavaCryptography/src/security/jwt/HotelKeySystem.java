@@ -1,5 +1,12 @@
 package security.jwt;
 
+import java.util.Date;
+
+import com.nimbusds.jose.JOSEException;
+import com.nimbusds.jwt.JWTClaimsSet;
+
+import security.KeyUtil;
+
 /**
  * HotelKeySystem 模擬一家酒店的房卡管理系統。
  * 在這個情境中，當房客入住酒店時，他們會得到一張「房間卡」，這張卡具有短暫的時效性，使他們能夠在有限的時間內進入房間。
@@ -16,7 +23,22 @@ package security.jwt;
  * 6. 模擬「房間卡產生器」過期後的情況。
  */
 public class HotelKeySystem {
-
+	
+	private static String masterKey; // 金鑰
+	
+	// 創建並簽署「房間卡」(Access Token)
+	private static String createRoomCard(String guest, String roomNo) throws JOSEException {
+		JWTClaimsSet roomCard = new JWTClaimsSet.Builder() 
+				.subject(guest) // 房客的身份
+				.issuer("https://hotel.com") // 飯店發行單位
+				.claim("room", roomNo)
+				.expirationTime(new Date(new Date().getTime() + 5000)) // 設定房卡有效時間，例如：5秒(5000ms)
+				.build(); // 建立房卡
+		String signedRoomCard = KeyUtil.signJWT(roomCard, masterKey); // 將房卡簽章
+		return signedRoomCard;
+	}
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

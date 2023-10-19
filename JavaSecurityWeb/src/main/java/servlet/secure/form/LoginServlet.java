@@ -25,6 +25,9 @@ public class LoginServlet extends HttpServlet {
 		out.println("username：" + username);
 		out.println("password：" + password);
 		
+		// 比較 username 與 password
+		// 若透過明碼去比較，就必須將 username 與 password 儲存在系統內
+		
 		
 	}
 	

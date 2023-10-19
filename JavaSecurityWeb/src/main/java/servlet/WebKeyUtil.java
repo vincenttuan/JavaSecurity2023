@@ -116,9 +116,10 @@ public class WebKeyUtil {
      * @param authHeader 從HTTP請求中獲取的'Authorization'頭部。
      * @param httpMethod HTTP請求方法（例如GET、POST等）。
      * @param uri 請求的URI。
+     * @param REALM 領域名稱（唯讀）。
      * @return 如果摘要驗證成功則返回true，否則返回false。
      */
-    public static boolean isValidDigest(String authHeader, String httpMethod, String uri) {
+    public static boolean isValidDigest(String authHeader, String httpMethod, String uri, final String REALM) {
     	// 解析 authHeader 來提取需要的值
         String usernameFromHeader = null, response = null, nonce = null, nc = null, cnonce = null, qop = null;
         
@@ -154,7 +155,7 @@ public class WebKeyUtil {
             return false; // 用戶名無效
         }
 
-        String ha1 = md5(VALID_USERNAME + ":" + "Digest Restricted Area" + ":" + VALID_PASSWORD);
+        String ha1 = md5(VALID_USERNAME + ":" + REALM + ":" + VALID_PASSWORD);
         String ha2 = md5(httpMethod + ":" + uri);
         String computedResponse = md5(ha1 + ":" + nonce + ":" + nc + ":" + cnonce + ":" + qop + ":" + ha2);
 

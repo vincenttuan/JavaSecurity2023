@@ -23,7 +23,7 @@ import servlet.WebKeyUtil;
 @WebServlet(value = "/secure/servlet/auth/digest_auth")
 public class DigestAuthServlet extends HttpServlet {
 	
-	private static final String REALM = "Digest Restricted Area";
+	private static final String REALM = "Restricted Area";
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

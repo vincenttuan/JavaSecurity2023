@@ -21,7 +21,7 @@ import servlet.WebKeyUtil;
  * */
 @WebServlet(value = "/secure/servlet/auth/basic_auth")
 public class BasicAuthServlet extends HttpServlet {
-	private static final String REALM = "Protected Area"; // 定義領域
+	private static final String REALM = "Restricted Area"; // 定義領域
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

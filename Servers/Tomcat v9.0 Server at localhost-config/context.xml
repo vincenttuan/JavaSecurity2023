@@ -28,8 +28,9 @@
     -->
     
     <!-- Secret Key -->
+    <!-- 當 override 屬性設為 false 表示不會被 web.xml 的 <env-entry> 所取代 -->
   	<Environment name="secretKey" 
   				value="XHKdflPzCnn1ejCnCWKBxo77fqmk4pW9il6Z+c/6o80=" 
   				type="java.lang.String" 
-  				override="true" />
+  				override="false" />
 </Context>

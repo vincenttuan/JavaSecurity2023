@@ -26,4 +26,10 @@
     <!--
     <Manager pathname="" />
     -->
+    
+    <!-- Secret Key -->
+  	<Environment name="secretKey" 
+  				value="aor5cr5wSh1XbNvjw2NwYrBt+CWstzAhJCWCd6ZH5Ug=" 
+  				type="java.lang.String" 
+  				override="true" />
 </Context>

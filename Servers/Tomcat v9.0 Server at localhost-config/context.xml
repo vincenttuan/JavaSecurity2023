@@ -29,7 +29,7 @@
     
     <!-- Secret Key -->
   	<Environment name="secretKey" 
-  				value="aor5cr5wSh1XbNvjw2NwYrBt+CWstzAhJCWCd6ZH5Ug=" 
+  				value="XHKdflPzCnn1ejCnCWKBxo77fqmk4pW9il6Z+c/6o80=" 
   				type="java.lang.String" 
   				override="true" />
 </Context>

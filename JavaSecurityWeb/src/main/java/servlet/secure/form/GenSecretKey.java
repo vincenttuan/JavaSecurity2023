@@ -26,7 +26,7 @@ public class GenSecretKey {
 	public static void main(String[] args) {
 		
 		String secretKey = WebKeyUtil.generateSecret(32); // 密鑰
-		System.out.println("密鑰: " + secretKey);
+		System.out.println("金鑰: " + secretKey);
 
 	}
 

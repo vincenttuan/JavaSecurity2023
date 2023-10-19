@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import servlet.WebKeyUtil;
+
 @WebServlet(value = "/secure/servlet/form/login")
 public class LoginServlet extends HttpServlet {
 
@@ -26,8 +28,22 @@ public class LoginServlet extends HttpServlet {
 		out.println("password：" + password);
 		
 		// 比較 username 與 password
-		// 若透過明碼去比較，就必須將 username 與 password 儲存在系統內
-		
+		// 取得金鑰
+		String secretKey = WebKeyUtil.getSecretKeyStringFromContext();
+		try {
+			// 將使用者所輸入的密碼加密
+			String encryptedPassword = WebKeyUtil.encrypt(password, secretKey);
+			out.println("encryptedPassword：" + encryptedPassword);
+			// 密碼加密後進行比對
+			if(WebKeyUtil.checkFormLogin(username, encryptedPassword)) {
+				out.println("Login OK !");
+			} else {
+				out.println("Login Error !");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

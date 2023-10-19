@@ -28,7 +28,7 @@ public class WebKeyUtil {
     
     // 預設的用戶名和密碼，用於 HTTP FROM 認證
     private static final String VALID_FORM_USERNAME = "user";
-    private static final String VALID_FORM_PASSWORD = ""; // 請自行填寫
+    private static final String VALID_FORM_PASSWORD = "Rn/mkRKRO9NwgZC80a7ItA=="; // 請自行填寫
    
     // 用於生成 nonce 的預設值
     private static final String NONCE_SECRET = "somesecret"; // 請自行填寫

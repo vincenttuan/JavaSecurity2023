@@ -589,9 +589,15 @@
 
 
   <!-- ==================== Built In Filter Mappings ====================== -->
-
+<!--	
+ 	<filter-mapping>
+        <filter-name>httpHeaderSecurity</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+-->
   <!-- The mapping for the HTTP header security Filter -->
-<!--
+<!--  
     <filter-mapping>
         <filter-name>httpHeaderSecurity</filter-name>
         <url-pattern>/*</url-pattern>

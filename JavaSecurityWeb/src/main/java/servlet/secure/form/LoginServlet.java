@@ -20,6 +20,17 @@ public class LoginServlet extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/plain;charset=UTF-8"); // "text/html;charset=UTF-8"
 		
+		// 取得 CSRF 令牌
+		String formCsrfToken = req.getParameter("csrfToken"); // 表單傳來的 csrf token
+		String sessionCsrfToken = req.getSession().getAttribute("csrfToken") + ""; // session 裡的 csrf token
+		
+		// 驗證 CSRF 令牌
+		if(formCsrfToken == null || !formCsrfToken.equals(sessionCsrfToken)) {
+			resp.getWriter().println("Invalid CSRF Token");
+			return;
+		}
+		
+		// 登入驗證
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		

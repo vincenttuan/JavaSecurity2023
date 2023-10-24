@@ -80,6 +80,20 @@
          the SSLImplementation selected. JSSE style configuration is used below.
     -->
     
+    <Connector 
+	    SSLEnabled="true" 
+	    SSLEngine="on" 
+	    clientAuth="false" 
+	    keystoreFile="/Users/vincenttuan/eclipse-workspace-javasecurity2023/Servers/Tomcat v9.0 Server at localhost-config/keys/web_ca.pfx" 
+	    keystorePass="123456" 
+	    keystoreType="pkcs12" 
+	    maxThreads="200" 
+	    port="8443" 
+	    protocol="org.apache.coyote.http11.Http11NioProtocol" 
+	    scheme="https" 
+	    secure="true" />
+    
+    
     <!--
     <Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
                maxThreads="150" SSLEnabled="true"

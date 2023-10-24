@@ -16,4 +16,15 @@
   	<env-entry-value>XHKdflPzCnn1ejCnCWKBxo77fqmk4pW9il6Z+c/6o80=</env-entry-value>
   </env-entry>
   
+  <security-constraint>
+    <display-name>Constraint1</display-name>
+    <web-resource-collection>
+        <web-resource-name>secure</web-resource-name>
+        <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <user-data-constraint>
+        <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+  
 </web-app>

@@ -7,6 +7,6 @@
 <title>Index</title>
 </head>
 <body>
-	Hello Java Security Web
+	Hello Java Security Web !
 </body>
 </html>

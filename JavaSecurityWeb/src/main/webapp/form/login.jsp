@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+	import="java.util.UUID"
     pageEncoding="UTF-8"%>
+
+<% 
+	// 生成 CSRF 令牌
+	String csrfToken = UUID.randomUUID().toString();
+	// 將 CSRF 令牌保存在 session 中
+	session.setAttribute("csrfToken", csrfToken);
+%>    
+    
 <!DOCTYPE html>
 <html>
 	<head>
@@ -29,6 +38,9 @@
 			
 			<!-- 防止瀏覽器保存密碼：autocomplete="new-password" -->
 			Password：<input type="password" id="password" name="password" autocomplete="new-password" /> Ex: 1234<p />
+			
+			<!-- 加入 csrf 令牌隱藏欄位 -->
+			<input type="hidden" name="csrfToken" value="<%=csrfToken %>">
 			
 			<input type="submit" value="Login" class="pure-button pure-button-primary" /><p />
 			

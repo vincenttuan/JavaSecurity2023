@@ -14,7 +14,9 @@ public class GithubLogin extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		resp.getWriter().print("Github login ...");
+		// 建立 Github OAuth 2.0 授權 URL 並重定向用戶
+		String authURL = OAuth2Util.AUTH_URL;
+		resp.sendRedirect(authURL);
 		
 	}
 	

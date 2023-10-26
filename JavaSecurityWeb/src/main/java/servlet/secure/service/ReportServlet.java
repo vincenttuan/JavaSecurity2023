@@ -18,7 +18,7 @@ import servlet.secure.oidc.OIDCUtil;
 public class ReportServlet extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		// 取得 idToken
 		String idToken = OIDCUtil.extractIdTokenFromHeader(req, resp);

@@ -50,7 +50,7 @@ public class OIDCCallback extends HttpServlet {
 			// 報告位置：https://localhost:8443/JavaSecurityWeb/secure/service/report
 			String reportURL = "https://localhost:8443/JavaSecurityWeb/secure/service/report";
 			Map<String, String> respReport = OIDCUtil.sendAuthenticatedRequestToService(idToken, reportURL);
-			resp.getWriter().println(respReport);
+			resp.getWriter().println(respReport.get("data"));
 			
 		} catch(Exception e) {
 			resp.getWriter().println("Exception: " + e);

@@ -20,7 +20,7 @@ public class OIDCCallback extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String code = req.getParameter("code");
-		resp.getWriter().println("code: " + code);
+		resp.getWriter().println("code: " + code); 
 		
 	}
 	

@@ -39,15 +39,15 @@ import com.nimbusds.jwt.proc.BadJWTException;
 import com.nimbusds.jwt.proc.ConfigurableJWTProcessor;
 import com.nimbusds.jwt.proc.DefaultJWTProcessor;
 
-//用戶端編號: 
-//用戶端密鑰: 
+//用戶端編號: 746689111115-j98ci2e41cmtfoo6jgs04o8g0kosi6du.apps.googleusercontent.com
+//用戶端密鑰: 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
 //回調 Servlet 的 URI: https://localhost:8443/JavaSecurityWeb/secure/callback/oidc
 //google 網頁應用程式 的用戶端 ID
-//https://console.cloud.google.com/apis/credentials/oauthclient/385692969595-4sceegvsa0blprte1k5qup5vem58ia36.apps.googleusercontent.com?project=web-pcschool
+//https://console.cloud.google.com/apis/credentials/oauthclient/
 
 public class OIDCUtil {
-	private static final String CLIENT_ID = ""; // 用戶端編號
-	private static final String CLIENT_SECRET = ""; // 用戶端密鑰
+	private static final String CLIENT_ID = "746689111115-j98ci2e41cmtfoo6jgs04o8g0kosi6du.apps.googleusercontent.com"; // 用戶端編號
+	private static final String CLIENT_SECRET = "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"; // 用戶端密鑰
 	private static final String REDIRECT_URI = "https://localhost:8443/JavaSecurityWeb/secure/callback/oidc"; // 回調的 URI
 	
 	/**

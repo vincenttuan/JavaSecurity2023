@@ -45,9 +45,10 @@
 			<input type="submit" value="Login" class="pure-button pure-button-primary" /><p />
 			
 			<!-- OAuth 2.0 第三方登入 -->
-			<a href="../secure/oauth2/github_login">使用 Github 登入</a><p />
+			<a href="../secure/oauth2/github_login">使用 Github 登入 (OAuth2)</a><p />
 			
-			
+			<!-- OIDC 第三方登入 -->
+			<a href="../secure/oidc/google_login">使用 Google 登入 (OIDC)</a><p />
 		</form>
 		
 	</body>

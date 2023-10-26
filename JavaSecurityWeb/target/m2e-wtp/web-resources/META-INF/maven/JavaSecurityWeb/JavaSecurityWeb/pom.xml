@@ -6,11 +6,31 @@
   <packaging>war</packaging>
   
   <dependencies>
+	  
+	<dependency>
+	    <groupId>org.apache.httpcomponents</groupId>
+	    <artifactId>httpclient</artifactId>
+	    <version>4.5.13</version> <!-- 請檢查 Maven 中心以獲得最新版本 -->
+	</dependency>
+	
 	<dependency>
 	    <groupId>org.json</groupId>
 	    <artifactId>json</artifactId>
-	    <version>20210307</version>
+	    <version>20210307</version> <!-- 請檢查 Maven 中心以獲得最新版本 -->
 	</dependency>
+	
+	<dependency>
+	    <groupId>com.nimbusds</groupId>
+	    <artifactId>nimbus-jose-jwt</artifactId>
+	    <version>9.16</version> <!-- 請檢查 Maven 中心以獲得最新版本 -->
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.apache.httpcomponents</groupId>
+	    <artifactId>fluent-hc</artifactId>
+	    <version>4.5.13</version> <!-- 请根据需要替换为最新版本 -->
+	</dependency>
+	
   </dependencies>
   
   <build>

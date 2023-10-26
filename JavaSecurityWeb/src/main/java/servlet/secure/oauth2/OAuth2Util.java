@@ -13,7 +13,7 @@ public class OAuth2Util {
 	
 	public final static String CLIENT_ID = "";
     private final static String CLIENT_SECRET = "";	
-    public final static String REDIRECT_URI = "http://localhost:8080/OAuth2-GitHub/callback";
+    public final static String REDIRECT_URI = "https://localhost:8443/JavaSecurityWeb/secure/callback/oauth2";
 	
     
     //  GitHub 的 OAuth 2.0 授權端點 (Authorization Endpoint)

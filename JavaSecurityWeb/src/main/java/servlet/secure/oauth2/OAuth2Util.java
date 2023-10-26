@@ -11,8 +11,8 @@ public class OAuth2Util {
 	// GitHub OAuth 2.0 的客戶端 ID 和密鑰。這些應該在 GitHub 設置中生成。
 	// 我們的應用程序的回調 URL(REDIRECT_URI)，這應該與在 GitHub 設置中的回調 URL 相匹配。
 	
-	public final static String CLIENT_ID = "";
-    private final static String CLIENT_SECRET = "";	
+	public final static String CLIENT_ID = "f2da3b38ba6480aaaa34";
+    private final static String CLIENT_SECRET = "2de365b18749f5d46edf4f2d2c408c1c6a1c4141";	
     public final static String REDIRECT_URI = "https://localhost:8443/JavaSecurityWeb/secure/callback/oauth2";
 	
     

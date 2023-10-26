@@ -1,6 +1,7 @@
 package servlet.secure.callback;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,8 +46,11 @@ public class OIDCCallback extends HttpServlet {
 			resp.getWriter().println("emailVerified: " + emailVerified);
 			
 			// 發送 idToken 來獲取所需要的服務資訊
-			
-			
+			// 查看機密的報告
+			// 報告位置：https://localhost:8443/JavaSecurityWeb/secure/service/report
+			String reportURL = "https://localhost:8443/JavaSecurityWeb/secure/service/report";
+			Map<String, String> respReport = OIDCUtil.sendAuthenticatedRequestToService(idToken, reportURL);
+			resp.getWriter().println(respReport);
 			
 		} catch(Exception e) {
 			resp.getWriter().println("Exception: " + e);

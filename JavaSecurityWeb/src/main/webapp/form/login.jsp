@@ -43,7 +43,7 @@
 			<input type="hidden" name="csrfToken" value="<%=csrfToken %>">
 			
 			<input type="submit" value="Login" class="pure-button pure-button-primary" /><p />
-			<a href="../secure/auth/github_login">使用 Github 登入</a><p />
+			<a href="../secure/oauth2/github_login">使用 Github 登入</a><p />
 		</form>
 		
 	</body>

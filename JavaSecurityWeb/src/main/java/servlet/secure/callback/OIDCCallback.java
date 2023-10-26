@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.nimbusds.jwt.JWTClaimsSet;
+
 import servlet.secure.oidc.OIDCUtil;
 
 /**
@@ -34,6 +36,16 @@ public class OIDCCallback extends HttpServlet {
 			// 得到 idToken
 			String idToken = OIDCUtil.getIDToken(code);
 			resp.getWriter().println("idToken: " + idToken); // JWT 的格式
+			
+			// 取得 email 資料
+			JWTClaimsSet claimsSet = OIDCUtil.getClaimsSetAndVerifyIdToken(idToken);
+			String email = claimsSet.getStringClaim("email");
+			resp.getWriter().println("email: " + email);
+			Boolean emailVerified = claimsSet.getBooleanClaim("email_verified");
+			resp.getWriter().println("emailVerified: " + emailVerified);
+			
+			// 發送 idToken 來獲取所需要的服務資訊
+			
 			
 			
 		} catch(Exception e) {

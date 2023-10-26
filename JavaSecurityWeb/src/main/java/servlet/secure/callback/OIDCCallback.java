@@ -18,10 +18,18 @@ public class OIDCCallback extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html;charset=UTF-8");
 		
+		resp.getWriter().print("<a href='/JavaSecurityWeb/form/login.jsp'>重新登入</a>");
+		
+		resp.getWriter().println("<pre>");
 		String code = req.getParameter("code");
 		resp.getWriter().println("code: " + code);
 		
+		
+		resp.getWriter().println("</pre>");
 	}
 	
 }

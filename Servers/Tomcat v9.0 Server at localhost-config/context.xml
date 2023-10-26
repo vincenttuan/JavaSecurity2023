@@ -33,4 +33,15 @@
   				value="XHKdflPzCnn1ejCnCWKBxo77fqmk4pW9il6Z+c/6o80=" 
   				type="java.lang.String" 
   				override="false" />
+  	<!-- 
+    	SameSite  
+    	SameSite 是一個相對較新的 cookie 屬性，旨在增強對 cookie 的防護，特別是用於防止 CSRF 攻擊。
+		SameSite 可以設定為以下三個值之一：
+		Strict: Cookie 只有在從相同站點的請求中才會被發送。這意味著只有從相同的站點域名發起的請求才能夠接收到 cookie。
+		Lax: Cookie 會在從相同站點的請求以及跨站點的 GET 請求中被發送。但是，在跨站點的 POST 請求中，cookie 不會被發送。
+		None: 無論是哪種請求，cookie 都將被發送。如果選擇此選項，則必須將 cookie 設置為 Secure（只在 HTTPS 上傳送）。	
+    -->
+    <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor"
+                     sameSiteCookies="strict" />
+                     			
 </Context>
